@@ -7,6 +7,8 @@ function Selector({
   setFromDate,
   toDate,
   setToDate,
+  interval,
+  setInterval,
   onValidate,
 }) {
   const [games, setGames] = useState([]);
@@ -44,6 +46,20 @@ function Selector({
         value={toDate}
         onChange={(e) => setToDate(e.target.value)}
       />
+      <br />
+      <br />
+      <label>Intervalle (minutes) : </label>
+      <select
+        value={interval}
+        onChange={(e) => setInterval(Number(e.target.value))}
+      >
+        <option value={5}>5 min</option>
+        <option value={15}>15 min</option>
+        <option value={30}>30 min</option>
+        <option value={60}>1 heure</option>
+      </select>
+      <br />
+      <br />
 
       <button onClick={onValidate}>Valider</button>
     </div>

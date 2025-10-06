@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Selector from "../components/Selector";
 import StatsGraph from "../components/StatsGraph";
+import Card from "../components/Card";
 
 function Stats() {
   const [stats, setStats] = useState(null);
@@ -8,6 +9,7 @@ function Stats() {
   const [fromDate, setFromDate] = useState("2025-09-25");
   const [toDate, setToDate] = useState("2025-09-26");
   const [interval, setInterval] = useState(15);
+  const [metric, setMetric] = useState("rank");
 
   const fetchStats = () => {
     const url = `http://185.126.238.166/api/streams?game=${game}&from=${fromDate}&to=${toDate}`;
@@ -32,10 +34,12 @@ function Stats() {
         setToDate={setToDate}
         interval={interval}
         setInterval={setInterval}
+        metric={metric}
+        setMetric={setMetric}
         onValidate={fetchStats}
       />
 
-      {stats && <StatsGraph stats={stats} interval={interval} />}
+      {stats && <StatsGraph stats={stats} interval={15} metric={metric} />}
     </div>
   );
 }

@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 function Selector({
   game,
   setGame,
-  fromDate,
-  setFromDate,
-  toDate,
-  setToDate,
-  interval,
-  setInterval,
+  // fromDate,
+  // setFromDate,
+  // toDate,
+  // setToDate,
+  // interval,
+  // setInterval,
+  // metric,
+  // setMetric,
+  atTimeStamp,
+  setAtTimeStamp,
   onValidate,
 }) {
   const [games, setGames] = useState([]);
@@ -31,10 +35,19 @@ function Selector({
           </option>
         ))}
       </select>
+      <label>A : </label>
+      <input
+        type="datetime-local"
+        name="time"
+        value={atTimeStamp}
+        onChange={(e) => setAtTimeStamp(e.target.value)}
+      />
+      <br />
+      <br />
 
       <br />
       <br />
-      <label>Du : </label>
+      {/* <label>Du : </label>
       <input
         type="date"
         value={fromDate}
@@ -47,8 +60,8 @@ function Selector({
         onChange={(e) => setToDate(e.target.value)}
       />
       <br />
-      <br />
-      <label>Intervalle (minutes) : </label>
+      <br /> */}
+      {/* <label>Intervalle (minutes) : </label>
       <select
         value={interval}
         onChange={(e) => setInterval(Number(e.target.value))}
@@ -59,7 +72,13 @@ function Selector({
         <option value={60}>1 heure</option>
       </select>
       <br />
-      <br />
+      <br /> */}
+
+      {/* <label>Afficher : </label>
+      <select value={metric} onChange={(e) => setMetric(e.target.value)}>
+        <option value="viewers">Viewers</option>
+        <option value="rank">Rank</option>
+      </select> */}
 
       <button onClick={onValidate}>Valider</button>
     </div>

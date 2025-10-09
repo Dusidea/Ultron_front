@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import DatePicker from "react-datepicker";
+import { parse, format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
-function Selector({
+function FromToSelector({
   game,
   setGame,
-  // fromDate,
-  // setFromDate,
-  // toDate,
-  // setToDate,
-  // interval,
-  // setInterval,
-  // metric,
-  // setMetric,
-  atTimeStamp,
-  setAtTimeStamp,
+  fromDate,
+  setFromDate,
+  toDate,
+  setToDate,
+  interval,
+  setInterval,
+  metric,
+  setMetric,
+  //   atTimeStamp,
+  //   setAtTimeStamp,
   onValidate,
 }) {
   const [games, setGames] = useState([]);
@@ -26,8 +29,8 @@ function Selector({
   }, []);
 
   return (
-    <div style={{ marginTop: "20px" }}>
-      <label>Choisir un jeu : </label>
+    <div className="p-4 bg-fuchsia-950 rounded-lg  ">
+      <label>Sélectionner une catégorie : </label>
       <select value={game} onChange={(e) => setGame(e.target.value)}>
         {games.map((g) => (
           <option key={g.id} value={encodeURIComponent(g.name)}>
@@ -35,19 +38,11 @@ function Selector({
           </option>
         ))}
       </select>
-      <label>A : </label>
-      <input
-        type="datetime-local"
-        name="time"
-        value={atTimeStamp}
-        onChange={(e) => setAtTimeStamp(e.target.value)}
-      />
-      <br />
-      <br />
 
       <br />
       <br />
-      {/* <label>Du : </label>
+
+      <label>Du : </label>
       <input
         type="date"
         value={fromDate}
@@ -60,8 +55,8 @@ function Selector({
         onChange={(e) => setToDate(e.target.value)}
       />
       <br />
-      <br /> */}
-      {/* <label>Intervalle (minutes) : </label>
+      <br />
+      <label>Intervalle (minutes) : </label>
       <select
         value={interval}
         onChange={(e) => setInterval(Number(e.target.value))}
@@ -72,17 +67,23 @@ function Selector({
         <option value={60}>1 heure</option>
       </select>
       <br />
-      <br /> */}
+      <br />
 
-      {/* <label>Afficher : </label>
+      <label>Afficher : </label>
       <select value={metric} onChange={(e) => setMetric(e.target.value)}>
         <option value="viewers">Viewers</option>
         <option value="rank">Rank</option>
-      </select> */}
-
-      <button onClick={onValidate}>Valider</button>
+      </select>
+      <div className="flex justify-center">
+        <button
+          onClick={onValidate}
+          className="border-2 border-solid rounded-xl bg-cyan-950 p-2"
+        >
+          Valider
+        </button>
+      </div>
     </div>
   );
 }
 
-export default Selector;
+export default FromToSelector;

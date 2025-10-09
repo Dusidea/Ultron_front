@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Selector from "../components/Selector";
-import Card from "../components/Card";
+import InstantSelector from "../components/InstantSelector";
+import InstantCard from "../components/InstantCard";
 
 export default function InstantStats() {
   const [stats, setStats] = useState([]);
@@ -32,8 +32,8 @@ export default function InstantStats() {
   };
 
   return (
-    <div>
-      <Selector
+    <div className="flex flex-col gap-8">
+      <InstantSelector
         game={game}
         setGame={setGame}
         atTimeStamp={atTimeStamp}
@@ -49,10 +49,12 @@ export default function InstantStats() {
         <div>Aucun stream trouvé</div>
       )}
 
-      <div>
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
         {!loading &&
           !error &&
-          stats.map((stream) => <Card key={stream.id} stream={stream} />)}
+          stats.map((stream) => (
+            <InstantCard key={stream.id} stream={stream} />
+          ))}
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Selector from "../components/Selector";
-import StatsGraph from "../components/StatsGraph";
-import Card from "../components/Card";
 
-function Stats() {
+import FromToSelector from "../components/FromToSelector";
+import FromToGraph from "../components/FromToGraph";
+
+function FromToStats() {
   const [stats, setStats] = useState(null);
   const [game, setGame] = useState("Hades%20II");
   const [fromDate, setFromDate] = useState("2025-09-25");
@@ -25,7 +25,7 @@ function Stats() {
 
   return (
     <div>
-      <Selector
+      <FromToSelector
         game={game}
         setGame={setGame}
         fromDate={fromDate}
@@ -39,9 +39,9 @@ function Stats() {
         onValidate={fetchStats}
       />
 
-      {stats && <StatsGraph stats={stats} interval={15} metric={metric} />}
+      {stats && <FromToGraph stats={stats} interval={15} metric={metric} />}
     </div>
   );
 }
 
-export default Stats;
+export default FromToStats;

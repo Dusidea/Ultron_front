@@ -1,22 +1,20 @@
 import { useState } from "react";
 
-import "./App.css";
+// import "./App.css";
 import Banner from "./components/Banner";
-import Stats from "./services/Stats";
+import FromToStats from "./services/FromToStats";
 import InstantStats from "./services/InstantStats";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <div className="container mx-auto px-4 flex flex-col gap-8">
       <Banner />
-      <div></div>
-      <h1>TwitchStats</h1>
 
-      {/* <Stats /> */}
+      {/* <FromToStats /> */}
       <InstantStats />
-    </>
+    </div>
   );
 }
 

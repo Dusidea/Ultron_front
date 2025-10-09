@@ -8,7 +8,7 @@ import {
   Legend,
 } from "recharts";
 
-const StatsGraph = ({ stats, interval = 15, metric = "viewers" }) => {
+const FromToGraph = ({ stats, interval = 15, metric = "viewers" }) => {
   // Grouper par streamer et filtrer sur interval
   const streamsByStreamer = stats.reduce((acc, item) => {
     const d = new Date(item.collectedAt.replace(" ", "T"));
@@ -86,4 +86,4 @@ const StatsGraph = ({ stats, interval = 15, metric = "viewers" }) => {
   );
 };
 
-export default StatsGraph;
+export default FromToGraph;

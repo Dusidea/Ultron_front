@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { format } from "date-fns";
 import InstantSelector from "../components/InstantSelector";
 import InstantCard from "../components/InstantCard";
 
@@ -6,9 +7,12 @@ export default function InstantStats() {
   const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [game, setGame] = useState("Hades%20II");
-  const [atTimeStamp, setAtTimeStamp] = useState("2025-09-25T15:00");
+  const now = new Date();
+  now.setMinutes(0, 0, 0);
+  const [atTimeStamp, setAtTimeStamp] = useState(
+    format(now, "yyyy-MM-dd'T'HH:mm")
+  );
 
   const fetchStats = async () => {
     setLoading(true);
@@ -49,7 +53,7 @@ export default function InstantStats() {
         <div>Aucun stream trouvé</div>
       )}
 
-      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(260px,260px))] justify-center">
         {!loading &&
           !error &&
           stats.map((stream) => (

@@ -9,7 +9,7 @@ export default function InstantCard({ stream }) {
           {stream.streamerName}
         </div>
 
-        <div className="flex flex-col justify-center font-twitch">
+        <div className="flex flex-col justify-center font-twitch wrap-anywhere">
           {stream.streamTitle}
         </div>
         <div className="flex flex-col justify-end">

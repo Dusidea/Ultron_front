@@ -9,7 +9,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="container mx-auto px-4 flex flex-col gap-8">
+    <div className="container mx-auto  flex flex-col gap-8">
       <Banner />
 
       {/* <FromToStats /> */}

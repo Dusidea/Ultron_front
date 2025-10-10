@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @layer base {
+  /* .container {
+    margin: 0;
+  } */
+
   body {
     font-family: "Charis SIL", serif;
     color-scheme: light dark;

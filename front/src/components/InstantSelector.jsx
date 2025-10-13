@@ -66,8 +66,41 @@ function InstantSelector({
   const sliderValue = selectedDate
     ? getHours(selectedDate) * 60 + getMinutes(selectedDate)
     : 0;
+
+  //date limits : begginning of available data until current date and time
   const minAvailableDate = new Date(2025, 8, 30);
   const today = new Date();
+
+  //testing if date is set to current date
+  function isToday(date) {
+    if (!date || !(date instanceof Date) || isNaN(date)) return false;
+    const today = new Date();
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
+  }
+
+  //preventing choosing future hours for today
+  const maxCurrentTime = isToday(selectedDate)
+    ? new Date(0, 0, 0, today.getHours(), 0)
+    : new Date(0, 0, 0, 23, 55);
+
+  const maxMinutes = isToday(selectedDate)
+    ? today.getHours() * 60 + today.getMinutes()
+    : 1439;
+
+  // Dynamic math to build time markers on the slider
+  const tickCount = 6; // number of markers
+  const tickStep = maxMinutes / (tickCount - 1);
+
+  const ticks = Array.from({ length: tickCount }, (_, i) => {
+    const minutes = Math.round(i * tickStep);
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`;
+  });
 
   return (
     <div className="p-4 bg-medium-purple-900 rounded-lg flex flex-col">
@@ -77,7 +110,7 @@ function InstantSelector({
           <select
             value={game}
             onChange={(e) => setGame(e.target.value)}
-            className="bg-black truncate w-full max-w-full"
+            className="bg-black truncate w-full max-w-full xl:w-1/4"
           >
             {/* mobile version display truncated values */}
             {games.map((g) => (
@@ -111,6 +144,8 @@ function InstantSelector({
               onChange={handleDateChange}
               minDate={minAvailableDate}
               maxDate={today}
+              minTime={new Date(0, 0, 0, 0, 0)}
+              maxTime={maxCurrentTime}
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
@@ -135,18 +170,16 @@ function InstantSelector({
             <input
               type="range"
               min={0}
-              max={1439}
+              max={maxMinutes}
               step={15}
               value={sliderValue}
               onChange={handleMinuteChange}
               className="w-3/4 accent-purple-400"
             />
             <div className="flex justify-between w-3/4 text-xs text-gray-400">
-              <span>00:00</span>
-              <span>06:00</span>
-              <span>12:00</span>
-              <span>18:00</span>
-              <span>23:59</span>
+              {ticks.map((label, i) => (
+                <span key={i}>{label}</span>
+              ))}
             </div>
           </div>
         )}

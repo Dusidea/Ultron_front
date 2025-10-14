@@ -52,8 +52,8 @@ export default function InstantStats() {
       {!loading && !error && stats.length === 0 && (
         <div>Aucun stream trouvé</div>
       )}
-
-      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(260px,260px))] justify-center">
+      <div>Heure sélectionnée : {format(atTimeStamp, "HH:mm")}</div>
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(260px,260px))] xl:pl-20">
         {!loading &&
           !error &&
           stats.map((stream) => (

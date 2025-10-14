@@ -61,11 +61,16 @@ function InstantSelector({
     const newDate = setMinutes(setHours(selectedDate, hours), minutes);
     const formatted = format(newDate, "yyyy-MM-dd'T'HH:mm");
     setAtTimeStamp(formatted);
-    onValidate?.();
+    // onValidate?.();
   };
   const sliderValue = selectedDate
     ? getHours(selectedDate) * 60 + getMinutes(selectedDate)
     : 0;
+
+  const handleSliderRelease = () => {
+    // sending the slider time request
+    onValidate?.();
+  };
 
   //date limits : begginning of available data until current date and time
   const minAvailableDate = new Date(2025, 8, 30);
@@ -174,6 +179,8 @@ function InstantSelector({
               step={15}
               value={sliderValue}
               onChange={handleMinuteChange}
+              onMouseUp={handleSliderRelease} // sends request when user releases the slider only
+              onTouchEnd={handleSliderRelease} // mobile/tactile case
               className="w-3/4 accent-purple-400"
             />
             <div className="flex justify-between w-3/4 text-xs text-gray-400">
